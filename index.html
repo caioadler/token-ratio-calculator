@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script charset="UTF-8" src="dist/fuzzball.umd.min.js"></script>
+    <style>
+        .content-block {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content-area {
+            width: 500px;
+            height: 500px;
+        }
+
+        .validate-button {
+            width: 100px;
+            height: 50px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 50px;
+        }
+
+        .result {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            white-space: pre-line;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="content-block">
+            <textarea class="original-content content-area" placeholder="Conteúdo original"></textarea>
+
+            <button class="validate-button" onclick="validate()">Validar</button>
+
+            <textarea class="validate-content content-area" placeholder="Conteúdo para validar"></textarea>
+        </div>
+
+        <div class="result">Resultado</div>
+    </div>
+
+    <script>
+        function validate() {
+            const originalContent = document.querySelector('.original-content').value;
+            const validateContent = document.querySelector('.validate-content').value;
+
+            const result = fuzzball.token_set_ratio(originalContent, validateContent);
+
+            document.querySelector('.result').innerHTML = `Resultado\n\n${result}`;
+        }
+    </script>
+</body>
+
+</html>
